@@ -1,0 +1,10 @@
+/build/
+/out/
+/.vs/
+*.user
+*.vcxproj*
+CMakeCache.txt
+CMakeFiles/
+*.obj
+*.pdb
+*.exe
