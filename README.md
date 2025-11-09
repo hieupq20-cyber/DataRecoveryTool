@@ -1,5 +1,5 @@
 # RecorveryDataTool
-Phase 0 – Chuẩn bị & định hướng
+## Phase 0 – Chuẩn bị & định hướng
 
  Xác định phạm vi tool
 
@@ -39,9 +39,9 @@ Phase 0 – Chuẩn bị & định hướng
 
  Cấu trúc cơ bản NTFS (Boot Sector, MFT, $Bitmap, Attribute…)
 
-Phase 1 – Truy cập raw disk (đọc ổ đĩa ở mức thấp)
+## Phase 1 – Truy cập raw disk (đọc ổ đĩa ở mức thấp)
 
- Task 1: Liệt kê các volume/partition có trên hệ thống
+### Task 1: Liệt kê các volume/partition có trên hệ thống ✅
 
  Viết module DiskEnumerator:
 
@@ -49,7 +49,7 @@ Phase 1 – Truy cập raw disk (đọc ổ đĩa ở mức thấp)
 
  In danh sách: C:, D:, E:… + loại (Fixed/Removable) + filesystem (NTFS/FAT32…)
 
- Task 2: Mở volume ở chế độ raw
+### Task 2: Mở volume ở chế độ raw ✅
 
  Viết module RawDiskReader:
 
@@ -64,9 +64,9 @@ bool ReadSectors(HANDLE hVolume, uint64_t startSector, uint32_t sectorCount, std
 
  Test: đọc Boot Sector (sector 0 của partition) và in ra một vài byte đầu để kiểm tra.
 
-Phase 2 – Parser hệ file NTFS (đọc cấu trúc logic)
+## Phase 2 – Parser hệ file NTFS (đọc cấu trúc logic)
 
- Task 3: Đọc & phân tích NTFS Boot Sector
+### Task 3: Đọc & phân tích NTFS Boot Sector ✅
 
  Tạo struct C++ map với NTFS Boot Sector (BPB)
 
@@ -213,7 +213,7 @@ enum class RecoveryStatus {
 
  Giai đoạn sau, khi core NTFS đã ổn.
 
-Phase 5 – Giao diện dòng lệnh (CLI)
+## Phase 5 – Giao diện dòng lệnh (CLI)
 
  Task 11: Xây menu console
 
@@ -233,7 +233,7 @@ Thoát
 
  In log đơn giản ra console (bước đầu chưa cần logging phức tạp)
 
-Phase 6 – Giao diện GUI (kết hợp với console)
+## Phase 6 – Giao diện GUI (kết hợp với console)
 
  Task 12: Chọn framework GUI
 
@@ -267,7 +267,7 @@ Không phụ thuộc vào console hay GUI
 
  UI (console/GUI) chỉ gọi hàm từ các module này → dễ bảo trì, test.
 
-Phase 7 – Logging, an toàn, tài liệu
+## Phase 7 – Logging, an toàn, tài liệu
 
  Task 14: Thêm hệ thống logging
 
@@ -300,3 +300,12 @@ Phase 7 – Logging, an toàn, tài liệu
  Không đảm bảo 100% khôi phục
 
  File bị ghi đè thì không cứu được
+
+## Xây dựng & chạy thử
+
+```
+cmake -S . -B build
+cmake --build build
+```
+
+> ⚠️ Ứng dụng hiện chỉ chạy được trên Windows vì phụ thuộc Windows API.
